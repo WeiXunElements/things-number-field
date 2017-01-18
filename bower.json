@@ -1,7 +1,22 @@
 {
   "name": "things-number-field",
+  "version": "0.1.01",
+  "authors": [
+    "Hatio Lab. <heartyoh@hatiolab.com>"
+  ],
   "description": "input field for number type value with formatting",
   "main": "things-number-field.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/ThingsElements/things-number-field/",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "numberInput"
+  ],
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "numeral": "^2.0.4",
