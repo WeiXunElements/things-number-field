@@ -1,0 +1,271 @@
+<!--
+A comment describing this element.
+
+Example:
+
+    <things-input-field format-with="#,###.000"></things-input-field>
+
+Example:
+
+    <things-input-field format-with="#,###.000">
+      <h2>Hello things-input-field format</h2>
+    </things-input-field>
+
+@demo demo/index.html
+-->
+<link rel="import" href="things-number-import.html">
+
+<dom-module id="things-number-field">
+  <style>
+    label{
+      @apply(--things-label);
+    }
+    input{
+      @apply(--things-input);
+    }
+    input:focus{
+      outline:none;
+    }
+    .hint:before{
+      @apply(--things-hint-arrow);
+    }
+    .hint{
+      @apply(--things-hint);
+    }
+  </style>
+  <template>
+    <label hidden="[[hidden]]">[[label]]</label>
+    <input is="iron-input"
+      id="text-field"
+      type="text"
+      bind-value="[[displayValue]]"
+      placeholder="[[placeholder]]"
+      tabindex$="[[tabIndex]]"
+      on-focus="_onTextFieldFocused">
+    </input>
+
+    <input is="iron-input" 
+      id="number-field"
+      name="[[name]]"
+      type="number"
+      bind-value="{{value}}"
+      min="[[min]]"
+      max="[[max]]"
+      minlength$="[[minlength]]"
+      maxlength$="[[maxlength]]"
+      validator="[[validator]]"
+      required$="[[required]]"
+      readonly$="[[readonly]]"
+      disabled="[[disabled]]"
+      error-message="[[errorMessage]]"
+      auto-validate="[[autoValidate]]"
+      on-blur ="_onNumberFieldBlur"
+      hidden>
+    </input>
+
+    <template is="dom-if" if="[[!isValid]]">
+      <span class="hint">[[errorMessage]]</span>
+    </template>
+  </template>
+  <script>
+  Polymer({
+      is: "things-number-field",
+
+      behavior: [
+          Polymer.IronFormElementBehavior
+      ],
+
+      properties: {
+          /**
+           * label string
+           */
+          label: {
+              type: String
+          },
+
+          /**
+           * input field name
+           */
+          name: {
+              type: String
+          },
+
+          /**
+           * input field value
+           */
+          value: {
+              type: String,
+              notify: true,
+              observer: '_valueChanged'
+          },
+
+          /**
+           * input field placeholder
+           */
+          placeholder: {
+              type: String
+          },
+
+          /**
+           * displayed format
+           *
+           *[10000,'0,0.0000','10,000.0000']
+           *[10000.23,'0,0','10,000']
+           *[-10000,'0,0.0','-10,000.0']
+           *[10000.1234,'0.000','10000.123']
+           *[-10000,'(0,0.0000)','(10,000.0000)']
+           *[-0.23,'.00','-.23']
+           *[-0.23,'(.00)','(.23)']
+           *[0.23,'0.00000','0.23000']
+           *[1230974,'0.0a','1.2m']
+           *[1460,'0a','1k']
+           *[-104000,'0a','-104k']
+           *[1,'0o','1st']
+           *[52,'0o','52nd']
+           *[23,'0o','23rd']
+           *[100,'0o','100th']
+           */
+          formatWith: {
+              type: String,
+              value: '#,###'
+          },
+
+          /**
+           * 자동 validation check 활성화 여부
+           */
+          autoValidate: {
+              type: Boolean,
+              value: false
+          },
+
+          /**
+           * type이 number일때 활성화 되며 최소값을 정의 합니다.
+           */
+          min: {
+              type: Number
+          },
+
+          /**
+           * type이 number일때 활성화 되며 최대값을 정의 합니다.
+           */
+          max: {
+              type: Number
+          },
+
+          /**
+           * type이 string일때 활성화 되며 입력 최소 길이를 정의 합니다.
+           */
+          minlength: {
+              type: Number
+          },
+
+          /**
+           * type이 string일때 활성화 되며 입력 최대 길이를 정의 합니다.
+           */
+          maxlength: {
+              type: Number
+          },
+
+          /**
+           * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+           */
+          isValid: {
+              type: Boolean,
+              value: true
+          },
+
+          /**
+           * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+           */
+          required: {
+              type: Boolean,
+              value: false
+          },
+
+          /**
+           * input field readonly attribute
+           */
+          readonly: {
+              type: Boolean,
+              value: false
+          },
+
+          /**
+           * input field disabled attribute
+           */
+          disabled: {
+              type: Boolean,
+              value: false
+          },
+
+          /**
+           * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+           */
+          errorMessage: {
+              type: String,
+              value: function() {
+                  // return Things.DataGlobal.t('text.invalid_input');
+              }
+          },
+
+          /**
+           * tab Index for input field
+           * @type {Number}
+           */
+          tabIndex: {
+              type: String
+          }
+      },
+      _onTextFieldFocused: function(){
+        if(this.readonly||this.disabled){
+          return;
+        }
+        this.$['text-field'].setAttribute('hidden',true);
+        this.$['number-field'].removeAttribute('hidden');
+        this.$['number-field'].focus();
+      },
+      _onNumberFieldBlur: function(){
+        if(this.readonly){
+          return;
+        }
+        this._changeDisplayValue();
+        this.$['number-field'].setAttribute('hidden',true);
+        this.$['text-field'].removeAttribute('hidden');
+      },
+
+      _changeDisplayValue: function(){
+        this.displayValue = numeral(this.value).format(this.formatWith);
+      },
+      /**
+       * 수동 validation check function
+       */
+      validate: function() {
+          this.isValid = this.$.input.validate();
+      },
+
+      /**
+       * autoValidate가 true일 때 bindValue의 변화를 감지해 validate 함수를 호출 합니다.
+       */
+      _valueChanged: function(bindValue) {
+          if (this.autoValidate) {
+              this.isValid = this.$.input.validate();
+          }
+      },
+
+      /**
+       * focus function
+       */
+      focus: function() {
+          this.$['text-field'].focus();
+      },
+
+      /**
+       * set tab index
+       */
+      setTabindex: function(tabIndex) {
+          this.$['text-field'].setAttribute('tabindex', tabIndex);
+      }
+  });
+  </script>
+
+</dom-module>
