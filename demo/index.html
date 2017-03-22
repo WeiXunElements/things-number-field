@@ -17,12 +17,16 @@
   <body>
 
     <div class="vertical-section-container centered">
-      <h3>Basic things-number-field Demo</h3>
       <demo-snippet>
         <template>
+          <template is="dom-bind">
+            Format: <input is="iron-input" bind-value="{{format}}"></br>
+
+            Value:
             <things-number-field
-              format-with="#,###.000">
+              format-with="[[format]]">
             </things-number-field>
+          </template>
         </template>
       </demo-snippet>
     </div>
