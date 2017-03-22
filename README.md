@@ -1,6 +1,25 @@
 # \<things-number-field\>
 
-input field for number type value with formatting
+필드에 숫자 형식의 값을 넣어 정의한 설정에 따라서 포맷함
+
+
+##엘리먼트 설명
+
+Example:
+
+```html
+    <things-number-field format-with="#,###.000"></things-number-field>
+```
+*****
+
+Example:
+
+```html
+    <things-number-field format-with="#,###.000">
+      <h2>Hello things-number-field format</h2>
+    </things-number-field>
+```
+*****
 
 ## Install the Polymer-CLI
 
