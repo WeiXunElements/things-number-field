@@ -1,8 +1,8 @@
 # \<things-number-field\>
 
-필드에 숫자 형식의 값을 넣어 정의한 설정에 따라서 포맷함
+It formats according to the defined settings by entering a numeric value in the field.
 
-입력 값 |  value |  포맷후
+Input value |  Value |  After formatting
 --|---|--
 10000| '0,0.0000'| '10,000.0000'
 10000.23| '0,0'| '10,000'
@@ -20,7 +20,7 @@
 23| '0o'| '23rd'
 100| '0o'| '100th'
 
-##엘리먼트 설명
+## Element Description
 
 Example:
 
@@ -38,17 +38,17 @@ Example:
 ```
 *****
 
-## Install the Polymer-CLI
+## Install Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-## Viewing Your Application
+## View Application
 
 ```
 $ polymer serve
 ```
 
-## Building Your Application
+## Build Application
 
 ```
 $ polymer build
@@ -65,7 +65,7 @@ from:
 $ polymer serve build/bundled
 ```
 
-## Running Tests
+## Run Tests
 
 ```
 $ polymer test
