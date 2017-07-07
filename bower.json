@@ -1,13 +1,13 @@
 {
   "name": "things-number-field",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
   "description": "필드에 숫자 형식의 값을 넣어 정의한 설정에 따라서 포맷함",
   "main": "things-number-field.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/ThingsElements/things-number-field/",
+  "license": "http://license.hatiolab.com/EULA",
+  "homepage": "http://elements.hatiolab.com/",
   "keywords": [
     "web-component",
     "polymer",
