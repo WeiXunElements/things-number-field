@@ -78,6 +78,7 @@ Copyright © HatioLab Inc. All rights reserved.
       disabled="[[disabled]]"
       error-message="[[errorMessage]]"
       auto-validate="[[autoValidate]]"
+      step="[[step]]"
       on-blur ="_onNumberFieldBlur"
       hidden>
     </input>
@@ -242,6 +243,16 @@ Copyright © HatioLab Inc. All rights reserved.
              */
             tabIndex: {
                 type: String
+            },
+
+            /**
+             * specifies the legal number intervals for an <input> element
+             ******
+             * @type {String}
+             */
+            step: {
+                type: String,
+                value: 'any'
             }
         },
         _onTextFieldFocused: function() {
