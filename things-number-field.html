@@ -58,7 +58,7 @@ Copyright © HatioLab Inc. All rights reserved.
       bind-value="[[displayValue]]"
       placeholder="[[placeholder]]"
       readonly$="[[readonly]]"
-      disabled="[[disabled]]"
+      disabled="[[readonly]]"
       tabindex$="[[tabIndex]]"
       on-focus="_onTextFieldFocused">
     </input>
@@ -75,7 +75,7 @@ Copyright © HatioLab Inc. All rights reserved.
       validator="[[validator]]"
       required$="[[required]]"
       readonly$="[[readonly]]"
-      disabled="[[disabled]]"
+      disabled="[[readonly]]"
       error-message="[[errorMessage]]"
       auto-validate="[[autoValidate]]"
       step="[[step]]"
@@ -222,7 +222,7 @@ Copyright © HatioLab Inc. All rights reserved.
             disabled: {
                 type: Boolean,
                 value: false,
-                computed: 'onComputedDisabled(readonly)'
+                observer: 'onDisabledChanged'
             },
 
             /*****
@@ -325,10 +325,14 @@ Copyright © HatioLab Inc. All rights reserved.
         },
 
         /**
-         * Disabled compute function - value via readonly
+         * Disabled value changed
+         *
+         * @author cuiguang
+         * @date 202105.07
+         *
          */
-        onComputedDisabled: function(readonly) {
-            return readonly;
+        onDisabledChanged: function(disabled) {
+            this.readonly = disabled;
         }
     });
     </script>
