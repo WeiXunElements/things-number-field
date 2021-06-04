@@ -1,13 +1,11 @@
 {
   "name": "things-number-field",
-  "version": "v2.2.3",
+  "version": "v2.2.4",
   "authors": [
-    "Hatio Lab. <heartyoh@hatiolab.com>"
+    "Shenzhen Weixun"
   ],
   "description": "필드에 숫자 형식의 값을 넣어 정의한 설정에 따라서 포맷함",
   "main": "things-number-field.html",
-  "license": "http://license.hatiolab.com/EULA",
-  "homepage": "http://elements.hatiolab.com/",
   "keywords": [
     "web-component",
     "polymer",
