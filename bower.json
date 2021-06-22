@@ -1,6 +1,6 @@
 {
   "name": "things-number-field",
-  "version": "v2.2.4",
+  "version": "v2.2.5",
   "authors": [
     "Shenzhen Weixun"
   ],
@@ -20,7 +20,7 @@
     "numeral": "^2.0.4",
     "iron-input": "^1.0.10",
     "iron-form-element-behavior": "^1.0.6",
-    "things-libraries": "ThingsElements/things-libraries#^2.0.0"
+    "things-libraries": "WeiXunElements/things-libraries#^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
